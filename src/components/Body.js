@@ -4,17 +4,21 @@ import { Typography, AppBar,
          Card, CardActions, CardContent, 
          CardMedia, CssBaseline, Grid, 
          Toolbar, Container,
-        Switch,FormControlLabel 
+        Switch,FormControlLabel
         
+      
        } from '@material-ui/core';
 
-import { PhotoCamera } from '@material-ui/icons';
+import { PhotoCamera, MenuBookTwoTone } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 import { purple } from '@material-ui/core/colors';
 import {Button} from '@material-ui/core';
-
+import axios from 'axios';
 import useStyles from '../styles';
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+
+
+const PIXABAY_URL = process.env.REACT_APP_SERVER_URL
 
 // Custom Switch color CASE #2
 const PurpleSwitch = withStyles({
@@ -37,32 +41,51 @@ const PurpleSwitch = withStyles({
 // Trigger toggle using onChange Switch
 
 function Body({toggleDark, settoggleDark}) {
+  const [pix, setPix] = React.useState([])
+  const [search, setSearch] = React.useState('')
+  React.useEffect(() => {
+    axios.get(PIXABAY_URL)
+    .then(res => {
+      setPix(res.data.hits)
+      console.log(res.data.hits);
+    })
+  },[])
+
+
+
   const classes = useStyles()
   const handleModeChange = () => {
     settoggleDark(!toggleDark);
-    localStorage.setItem('darkMode', toggleDark === true);
+
     
     };
+
+  const handleSearch = e => {
+      setSearch(e.target.value)
+    }
+
+  const pixFinder = pix.filter(pixs => 
+      pixs.user.toLowerCase().includes(search.toLowerCase()) ||
+      pixs.tags.toLowerCase().includes(search.toLowerCase())
+    )
   return (
    <>
    <div className={classes.root}>
-   <AppBar position='relative'>
-     <Toolbar>
+   <AppBar position='relative' id='appbar'>
+     <Toolbar id="toolbar">
       <PhotoCamera className={classes.icon}/>
       <Typography variant='h6'>Photo Album</Typography>
+
      </Toolbar>
-   </AppBar>
+   </AppBar>    
+   <div className="coin-search" align='center'>
+        <h1 className="coin-text">Search Your Favorite</h1>
+        <form>
+          <input type="text" placeholder="Search" className="coin-input" onChange={handleSearch} />
+        </form>
+      </div>
       <div className={classes.change}>
-        {/* Swith CASE#1 */}
-      {/* <Switch
-            color='secondary'
-            checked={toggleDark}
-            onChange={handleModeChange}
-            name="toggleDark"
-          /> */}
 
-
-        {/* Swith CASE#2 */}
 
         <FormControlLabel
             control={
@@ -103,21 +126,23 @@ function Body({toggleDark, settoggleDark}) {
 </div>
 <Container className={classes.cardGrid} maxWidth="md">
 <Grid container spacing={4}>
-{cards.map((card) => (
-    <Grid item key={card} xs={12} sm={6} md={4}>
+{pixFinder.map((card) => (
+    <Grid item key={card.id} xs={12} sm={6} md={4}>
      
       <Card className={classes.card} id="card">
         <CardMedia 
             className={classes.cardMedia}
-            image="https://source.unsplash.com/random/"
+            // image="https://source.unsplash.com/random/"
+            image={card.largeImageURL}
             title="Image title"
         />
         <CardContent classes={classes.cardContent} >
         <Typography gutterBottom variant="h5">
-          Heading
+        <div>User:</div> {card.user}
         </Typography>
         <Typography>
-          this media card. can be used thi section to describe the content.
+            <div>Decription:</div>
+          {card.tags.charAt(0).toUpperCase() + card.tags.slice(1)}.
         </Typography>
         </CardContent>
         <CardActions>

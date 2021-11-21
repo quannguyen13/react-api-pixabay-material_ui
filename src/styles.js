@@ -12,6 +12,7 @@ container: {
         
 },
 icon: {
+        
         marginRight: '20px'
 },
 button: {

@@ -7,3 +7,16 @@ body{
     border-radius: 20px;
     /* background-color: darkslategray; */
 }
+#appbar{
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+#toolbar{
+    width: 1000px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
