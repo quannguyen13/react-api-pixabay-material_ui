@@ -1,0 +1,9 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+#card{
+    border: 1px solid white;
+    border-radius: 20px;
+    /* background-color: darkslategray; */
+}

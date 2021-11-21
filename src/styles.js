@@ -1,9 +1,13 @@
 import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
+switchBase:{
+        color: 'purple'},
+root: {
+        backgroundColor: theme.palette.background.primary,
+        color: theme.palette.text.primary,
+},
 container: {
-        // backgroundColor: theme.palette.background.paper,
-        backgroundColor: 'white',
         padding: theme.spacing(8, 0, 6),
         
 },
@@ -17,6 +21,7 @@ cardGrid:{
         padding: '25px'
 },
 card:{
+        backgroundColor: theme.palette.background.secondary,
         height:"100%",
         display:"flex",
         flexDirection:"column"
@@ -26,11 +31,17 @@ cardMedia:{
         paddingTop:"56.25%"
 },
 cardContent:{
+        
         flexGrow: 1
         
 },
+change:{
+        
+       display:"flex",
+       flexDirection:"row",
+       justifyContent:"center"
+},
 footer: {
-        // backgroundColor: theme.palette.background.paper,
         padding: '50px 0'
 }
 }))
