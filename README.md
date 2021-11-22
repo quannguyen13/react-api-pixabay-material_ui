@@ -1,6 +1,6 @@
 # React Pixabay API.
 
-This project was built with React framework and Material UI with functional Dark Mode.
+This project was built with `React` framework and Material UI with functional `Dark Mode`.
 
 
 <img src=https://i.imgur.com/qRp4sxN.gif width=300 height=450>
