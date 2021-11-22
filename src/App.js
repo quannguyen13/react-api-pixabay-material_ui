@@ -5,7 +5,11 @@ import "./App.css"
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
   
 function App() {
-  const [toggleDark, settoggleDark] = React.useState(false);
+  // const [toggleDark, settoggleDark] = React.useState(false);
+  const [toggleDark, settoggleDark] = React.useState(window.localStorage.getItem('dark-mode') === 'true');
+  React.useEffect(() => {
+    window.localStorage.setItem('dark-mode', toggleDark);
+  }, [toggleDark]);
 
   const themeLight = createTheme({
   palette: {
@@ -32,7 +36,7 @@ const themeDark = createTheme({
       <div >
 
     {/* // Wrapping code in ThemeProvider */}
-    <ThemeProvider theme={!toggleDark ?  themeLight : themeDark}>
+    <ThemeProvider theme={toggleDark ? themeDark : themeLight }>
       <Body  toggleDark={toggleDark}
       settoggleDark={settoggleDark} />
     </ThemeProvider>

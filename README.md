@@ -13,7 +13,7 @@ This project was built with `React` framework and Material UI with functional `D
 * Javascripts Methods.
 
 # Fully Responsive Landing Page
-<img src=https://i.imgur.com/OdI57aR.gif width=300 height=450>
+<img src=https://media.giphy.com/media/TO7fWtrHUmzG0Q3Jkk/giphy.gif width=300 height=450>
 
 # Download & Setup.
 In your terminal:
